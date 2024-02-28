@@ -1,0 +1,43 @@
+1.IMG2OUTLINE(CANNY)
+import cv2
+import numpy as np
+kernel = np.ones((5,5),np.uint8)
+print(kernel)
+path ="C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg"
+img =cv2.imread(path)
+imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+imgBlur = cv2.GaussianBlur(imgGray,(7,7),0)
+imgCanny = cv2.Canny(imgBlur,100,200)
+cv2.imshow("Img Canny",imgCanny)
+cv2.waitKey(0)
+
+2.ROTATION
+import cv2
+original_image = cv2.imread("C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg")
+clockwise_rotated_image = cv2.rotate(original_image, cv2.ROTATE_90_CLOCKWISE)
+cv2.imshow('Clockwise Rotated Image', clockwise_rotated_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+3.IMG2BIG&SMALL
+import cv2
+original_image = cv2.imread("C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg")
+scale_factor_bigger = 2 
+bigger_image = cv2.resize(original_image, None, fx=scale_factor_bigger, fy=scale_factor_bigger, interpolation=cv2.INTER_LINEAR)
+scale_factor_smaller = 0.5  
+smaller_image = cv2.resize(original_image, None, fx=scale_factor_smaller, fy=scale_factor_smaller, interpolation=cv2.INTER_LINEAR)
+cv2.imshow('Bigger Image', bigger_image)
+cv2.imshow('Smaller Image', smaller_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+4.SOBEL MATRIX X-AXIS
+import cv2
+img = cv2.imread("C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg") 
+cv2.imshow('Original', img)
+cv2.waitKey(0)
+img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img_blur = cv2.GaussianBlur(img_gray, (3,3), 0) 
+sobelx = cv2.Sobel(src=img_blur, ddepth=cv2.CV_64F, dx=1, dy=0, ksize=5) 
+cv2.imshow('Sobel X', sobelx)
+cv2.waitKey(0)
