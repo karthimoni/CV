@@ -1,0 +1,58 @@
+1.IMG3ERODE
+import cv2
+import numpy as np
+kernel = np.ones((5,5),np.uint8)
+print(kernel)
+path = "C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg"
+img =cv2.imread(path)
+imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+imgBlur = cv2.GaussianBlur(imgGray,(7,7),0)
+imgCanny = cv2.Canny(imgBlur,100,200)
+imgDilation = cv2.dilate(imgCanny,kernel , iterations = 10)
+imgEroded = cv2.erode(imgDilation,kernel,iterations=2)
+cv2.imshow("Img Erosion",imgEroded)
+cv2.waitKey(0)
+
+2.IMG2BIGSMALL
+import cv2
+original_image = cv2.imread("C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg")
+scale_factor_bigger = 2 
+bigger_image = cv2.resize(original_image, None, fx=scale_factor_bigger, fy=scale_factor_bigger, interpolation=cv2.INTER_LINEAR)
+scale_factor_smaller = 0.5  
+smaller_image = cv2.resize(original_image, None, fx=scale_factor_smaller, fy=scale_factor_smaller, interpolation=cv2.INTER_LINEAR)
+cv2.imshow('Bigger Image', bigger_image)
+cv2.imshow('Smaller Image', smaller_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+3.MORPHO GRADIENT DILATE TECHNIQUE
+import cv2
+import numpy as np
+image = cv2.imread('your_image_path.jpg', cv2.IMREAD_GRAYSCALE)
+kernel = np.ones((5, 5), np.uint8)
+dilation = cv2.dilate(image, kernel, iterations=1)
+erosion = cv2.erode(image, kernel, iterations=1)
+morph_gradient = cv2.subtract(dilation, erosion)
+cv2.imshow('Original Image', image)
+cv2.imshow('Morphological Gradient', morph_gradient)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+4.WATER MARK ON IMG
+import cv2
+img = cv2.imread("C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/im.jpg")
+wm = cv2.imread("C:/Users/REVANTH SANTHIPRASAD/OneDrive/Desktop/monica/CV/image.jpg")
+h_wm, w_wm = wm.shape[:2]
+h_img, w_img = img.shape[:2]
+center_x = int(w_img/2)
+center_y = int(h_img/2)
+top_y = center_y - int(h_wm/2)
+left_x = center_x - int(w_wm/2)
+bottom_y = top_y + h_wm
+right_x = left_x + w_wm
+roi = img[top_y:bottom_y, left_x:right_x]
+result = cv2.addWeighted(roi, 1, wm, 0.3, 0)
+img[top_y:bottom_y, left_x:right_x] = result
+cv2.imshow("Watermarked Image", img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
